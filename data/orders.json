@@ -1,93 +1,87 @@
 [
   {
-    "order_id": "ord_5001",
-    "customer_id": "cus_1001",
-    "status": "delivered",
-    "placed_at": "2026-06-20",
-    "delivered_at": "2026-06-24",
-    "eligible_return_until": "2026-07-01",
-    "total": 8999,
-    "currency": "INR",
-    "payment_status": "paid",
-    "tracking_number": "BLUETRK10001",
+    "id": "ORD-1001",
+    "customer_id": "CUST-001",
     "items": [
-      {"sku": "BG-AIRPODS-01", "name": "BlueBuds Air", "quantity": 1, "category": "audio", "final_sale": false}
-    ]
+      {
+        "item_id": "ITEM-101",
+        "name": "Wireless Noise-Cancelling Headphones",
+        "price": 149.99,
+        "warranty_days": 365
+      }
+    ],
+    "total_amount": 149.99,
+    "status": "delivered",
+    "order_date": "2026-09-15T12:00:00Z",
+    "delivered_date": "2026-09-20T14:30:00Z",
+    "tracking_number": "TRK-981240"
   },
   {
-    "order_id": "ord_5002",
-    "customer_id": "cus_1002",
+    "id": "ORD-1002",
+    "customer_id": "CUST-002",
+    "items": [
+      {
+        "item_id": "ITEM-102",
+        "name": "Smart Fitness Watch",
+        "price": 220.00,
+        "warranty_days": 365
+      }
+    ],
+    "total_amount": 220.00,
+    "status": "delivered",
+    "order_date": "2026-07-25T10:00:00Z",
+    "delivered_date": "2026-08-01T11:00:00Z",
+    "tracking_number": "TRK-980112"
+  },
+  {
+    "id": "ORD-1003",
+    "customer_id": "CUST-003",
+    "items": [
+      {
+        "item_id": "ITEM-103",
+        "name": "Ultra-Wide Gaming Monitor 34-inch",
+        "price": 450.00,
+        "warranty_days": 365
+      }
+    ],
+    "total_amount": 450.00,
+    "status": "delivered",
+    "order_date": "2026-05-10T09:00:00Z",
+    "delivered_date": "2026-05-15T16:00:00Z",
+    "tracking_number": "TRK-975541"
+  },
+  {
+    "id": "ORD-1004",
+    "customer_id": "CUST-004",
+    "items": [
+      {
+        "item_id": "ITEM-104",
+        "name": "Pro Mechanical Keyboard",
+        "price": 129.50,
+        "warranty_days": 365
+      }
+    ],
+    "total_amount": 129.50,
+    "status": "delivered",
+    "order_date": "2025-01-10T14:00:00Z",
+    "delivered_date": "2025-01-15T15:00:00Z",
+    "tracking_number": "TRK-960220"
+  },
+  {
+    "id": "ORD-1005",
+    "customer_id": "CUST-005",
+    "items": [
+      {
+        "item_id": "ITEM-105",
+        "name": "Ergonomic Office Chair",
+        "price": 280.00,
+        "warranty_days": 365
+      }
+    ],
+    "total_amount": 280.00,
     "status": "in_transit",
-    "placed_at": "2026-06-22",
-    "delivered_at": null,
-    "eligible_return_until": null,
-    "total": 2499,
-    "currency": "INR",
-    "payment_status": "paid",
-    "tracking_number": "BLUETRK10002",
-    "items": [
-      {"sku": "BG-CASE-14", "name": "Phone Case Pro", "quantity": 1, "category": "accessory", "final_sale": false}
-    ]
-  },
-  {
-    "order_id": "ord_5003",
-    "customer_id": "cus_1003",
-    "status": "delivered",
-    "placed_at": "2026-06-10",
-    "delivered_at": "2026-06-14",
-    "eligible_return_until": "2026-06-21",
-    "total": 12999,
-    "currency": "INR",
-    "payment_status": "paid",
-    "tracking_number": "BLUETRK10003",
-    "items": [
-      {"sku": "BG-CAM-02", "name": "HomeCam Mini", "quantity": 1, "category": "camera", "final_sale": false}
-    ]
-  },
-  {
-    "order_id": "ord_5004",
-    "customer_id": "cus_1004",
-    "status": "delivered",
-    "placed_at": "2026-05-18",
-    "delivered_at": "2026-05-22",
-    "eligible_return_until": "2026-05-29",
-    "total": 4999,
-    "currency": "INR",
-    "payment_status": "paid",
-    "tracking_number": "BLUETRK10004",
-    "items": [
-      {"sku": "BG-SOFT-01", "name": "Cloud Backup Annual License", "quantity": 1, "category": "software", "final_sale": true}
-    ]
-  },
-  {
-    "order_id": "ord_5005",
-    "customer_id": "cus_1005",
-    "status": "delivered",
-    "placed_at": "2025-06-01",
-    "delivered_at": "2025-06-05",
-    "eligible_return_until": "2025-06-12",
-    "total": 34999,
-    "currency": "INR",
-    "payment_status": "paid",
-    "tracking_number": "BLUETRK10005",
-    "items": [
-      {"sku": "BG-TAB-10", "name": "BlueTab 10", "quantity": 1, "category": "tablet", "final_sale": false}
-    ]
-  },
-  {
-    "order_id": "ord_5006",
-    "customer_id": "cus_1006",
-    "status": "delivered",
-    "placed_at": "2026-06-28",
-    "delivered_at": "2026-06-30",
-    "eligible_return_until": "2026-07-07",
-    "total": 15999,
-    "currency": "INR",
-    "payment_status": "paid",
-    "tracking_number": "BLUETRK10006",
-    "items": [
-      {"sku": "BG-WATCH-04", "name": "BlueWatch Sport", "quantity": 1, "category": "wearable", "final_sale": false}
-    ]
+    "order_date": "2026-09-25T11:00:00Z",
+    "delivered_date": null,
+    "tracking_number": "TRK-992384"
   }
 ]
-

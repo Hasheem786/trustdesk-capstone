@@ -1,0 +1,87 @@
+[
+  {
+    "id": "ORD-1001",
+    "customer_id": "CUST-001",
+    "items": [
+      {
+        "item_id": "ITEM-101",
+        "name": "Wireless Noise-Cancelling Headphones",
+        "price": 149.99,
+        "warranty_days": 365
+      }
+    ],
+    "total_amount": 149.99,
+    "status": "delivered",
+    "order_date": "2026-09-15T12:00:00Z",
+    "delivered_date": "2026-09-20T14:30:00Z",
+    "tracking_number": "TRK-981240"
+  },
+  {
+    "id": "ORD-1002",
+    "customer_id": "CUST-002",
+    "items": [
+      {
+        "item_id": "ITEM-102",
+        "name": "Smart Fitness Watch",
+        "price": 220.00,
+        "warranty_days": 365
+      }
+    ],
+    "total_amount": 220.00,
+    "status": "delivered",
+    "order_date": "2026-07-25T10:00:00Z",
+    "delivered_date": "2026-08-01T11:00:00Z",
+    "tracking_number": "TRK-980112"
+  },
+  {
+    "id": "ORD-1003",
+    "customer_id": "CUST-003",
+    "items": [
+      {
+        "item_id": "ITEM-103",
+        "name": "Ultra-Wide Gaming Monitor 34-inch",
+        "price": 450.00,
+        "warranty_days": 365
+      }
+    ],
+    "total_amount": 450.00,
+    "status": "delivered",
+    "order_date": "2026-05-10T09:00:00Z",
+    "delivered_date": "2026-05-15T16:00:00Z",
+    "tracking_number": "TRK-975541"
+  },
+  {
+    "id": "ORD-1004",
+    "customer_id": "CUST-004",
+    "items": [
+      {
+        "item_id": "ITEM-104",
+        "name": "Pro Mechanical Keyboard",
+        "price": 129.50,
+        "warranty_days": 365
+      }
+    ],
+    "total_amount": 129.50,
+    "status": "delivered",
+    "order_date": "2025-01-10T14:00:00Z",
+    "delivered_date": "2025-01-15T15:00:00Z",
+    "tracking_number": "TRK-960220"
+  },
+  {
+    "id": "ORD-1005",
+    "customer_id": "CUST-005",
+    "items": [
+      {
+        "item_id": "ITEM-105",
+        "name": "Ergonomic Office Chair",
+        "price": 280.00,
+        "warranty_days": 365
+      }
+    ],
+    "total_amount": 280.00,
+    "status": "in_transit",
+    "order_date": "2026-09-25T11:00:00Z",
+    "delivered_date": null,
+    "tracking_number": "TRK-992384"
+  }
+]

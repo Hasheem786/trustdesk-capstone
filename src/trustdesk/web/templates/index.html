@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TrustDesk - AI Support Operations Agent</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/static/css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-slate-50 text-slate-900 font-sans antialiased min-h-screen flex flex-col">
+
+  <!-- Top Navigation Header -->
+  <header class="bg-white border-b border-slate-200 sticky top-0 z-30 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <div class="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center text-white font-bold text-xl shadow-md">
+          <i class="fa-solid fa-shield-halved"></i>
+        </div>
+        <div>
+          <div class="flex items-center space-x-2">
+            <h1 class="text-xl font-bold tracking-tight text-slate-900">TrustDesk</h1>
+            <span class="text-xs font-semibold px-2 py-0.5 rounded bg-blue-100 text-blue-800">Agentic AI Ops</span>
+          </div>
+          <p class="text-xs text-slate-500">Enterprise AI Support Co-pilot with Grounded RAG & HITL Guardrails</p>
+        </div>
+      </div>
+
+      <div class="flex items-center space-x-4">
+        <div class="flex items-center space-x-2 text-xs text-slate-600 bg-slate-100 px-3 py-1.5 rounded-lg border border-slate-200">
+          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+          <span>Engine: <strong id="engine-mode">Deterministic Adapter</strong></span>
+        </div>
+        <a href="/walkthrough" target="_blank" class="flex items-center space-x-1.5 bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold px-3.5 py-2 rounded-lg shadow-sm transition">
+          <i class="fa-solid fa-circle-play"></i>
+          <span>5-Min Video Walkthrough</span>
+        </a>
+        <button id="btn-eval" onclick="runBenchmarkModal()" class="flex items-center space-x-1.5 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold px-3.5 py-2 rounded-lg shadow-sm transition">
+          <i class="fa-solid fa-vial-circle-check"></i>
+          <span>Run Benchmark Eval</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Work Area -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex-1 w-full grid grid-cols-12 gap-6">
+
+    <!-- Column 1: Ticket Queue (4 cols) -->
+    <section class="col-span-12 lg:col-span-4 flex flex-col space-y-4">
+      <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex flex-col space-y-3">
+        <div class="flex items-center justify-between">
+          <h2 class="font-bold text-sm text-slate-800 flex items-center space-x-2">
+            <i class="fa-solid fa-inbox text-blue-600"></i>
+            <span>Ticket Queue</span>
+            <span id="ticket-count" class="ml-1 bg-slate-100 text-slate-600 text-xs px-2 py-0.5 rounded-full font-semibold">0</span>
+          </h2>
+          <button onclick="openNewTicketModal()" class="text-xs text-blue-600 hover:text-blue-800 font-semibold flex items-center space-x-1">
+            <i class="fa-solid fa-plus"></i>
+            <span>Simulate Ticket</span>
+          </button>
+        </div>
+
+        <!-- Filter Tabs -->
+        <div class="flex flex-wrap gap-1 text-xs border-b border-slate-100 pb-2">
+          <button onclick="filterTickets('all')" class="filter-tab px-2.5 py-1 rounded-md font-medium bg-blue-50 text-blue-600" data-filter="all">All</button>
+          <button onclick="filterTickets('new')" class="filter-tab px-2.5 py-1 rounded-md font-medium text-slate-600 hover:bg-slate-100" data-filter="new">New</button>
+          <button onclick="filterTickets('pending_approval')" class="filter-tab px-2.5 py-1 rounded-md font-medium text-slate-600 hover:bg-slate-100" data-filter="pending_approval">HITL Action</button>
+          <button onclick="filterTickets('escalated')" class="filter-tab px-2.5 py-1 rounded-md font-medium text-slate-600 hover:bg-slate-100" data-filter="escalated">Escalated</button>
+        </div>
+
+        <!-- Ticket Cards Scrollable List -->
+        <div id="ticket-list" class="space-y-2 overflow-y-auto max-h-[calc(100vh-280px)] pr-1">
+          <div class="text-center py-8 text-xs text-slate-400">Loading tickets...</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Column 2: Ticket Details & AI Co-pilot Center (8 cols) -->
+    <section class="col-span-12 lg:col-span-8 flex flex-col space-y-4">
+      <div id="ticket-detail-view" class="bg-white rounded-xl border border-slate-200 shadow-sm p-6 flex flex-col space-y-6">
+        <div class="text-center py-20 text-slate-400 text-sm">
+          <i class="fa-solid fa-arrow-pointer text-3xl mb-2 text-slate-300"></i>
+          <p>Select a support ticket from the queue on the left to inspect AI Triage, Policy Citations, and HITL Actions.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Modal: Benchmark Evaluation Results -->
+  <div id="modal-eval" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm hidden z-50 flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-3xl w-full shadow-2xl border border-slate-200 overflow-hidden flex flex-col max-h-[90vh]">
+      <div class="px-6 py-4 border-b border-slate-100 flex items-center justify-between bg-slate-50">
+        <div class="flex items-center space-x-2">
+          <i class="fa-solid fa-chart-line text-indigo-600 text-lg"></i>
+          <h3 class="font-bold text-slate-800 text-base">TrustDesk Benchmark Evaluation Suite</h3>
+        </div>
+        <button onclick="closeBenchmarkModal()" class="text-slate-400 hover:text-slate-600 text-lg">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div id="eval-modal-body" class="p-6 overflow-y-auto space-y-6">
+        <div class="flex items-center justify-center py-12 space-x-3 text-slate-500">
+          <i class="fa-solid fa-spinner fa-spin text-2xl text-indigo-600"></i>
+          <span class="text-sm font-medium">Running 12 gold-standard evaluation cases across Triage, RAG Grounding, Adversarial Injections, and HITL Idempotency...</span>
+        </div>
+      </div>
+
+      <div class="px-6 py-3 border-t border-slate-100 bg-slate-50 flex justify-end">
+        <button onclick="closeBenchmarkModal()" class="px-4 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 text-xs font-semibold rounded-lg">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Simulate New Ticket -->
+  <div id="modal-new-ticket" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm hidden z-50 flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-lg w-full shadow-2xl border border-slate-200 p-6 flex flex-col space-y-4">
+      <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+        <h3 class="font-bold text-slate-800 text-sm flex items-center space-x-2">
+          <i class="fa-solid fa-ticket text-blue-600"></i>
+          <span>Simulate Incoming Customer Ticket</span>
+        </h3>
+        <button onclick="closeNewTicketModal()" class="text-slate-400 hover:text-slate-600">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <form id="new-ticket-form" onsubmit="submitNewTicket(event)" class="space-y-4">
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 mb-1">Customer</label>
+          <select id="new-cust-id" class="w-full text-xs border border-slate-200 rounded-lg p-2 focus:ring-2 focus:ring-blue-500 outline-none">
+            <option value="CUST-001">Alice Smith (CUST-001, Standard)</option>
+            <option value="CUST-002">Bob Johnson (CUST-002, VIP)</option>
+            <option value="CUST-003">Charlie Brown (CUST-003, Standard)</option>
+            <option value="CUST-004">Diana Prince (CUST-004, VIP)</option>
+            <option value="CUST-005">Evan Davis (CUST-005, Standard)</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 mb-1">Associated Order (Optional)</label>
+          <select id="new-order-id" class="w-full text-xs border border-slate-200 rounded-lg p-2 focus:ring-2 focus:ring-blue-500 outline-none">
+            <option value="">None (General Inquiry / Security)</option>
+            <option value="ORD-1001">ORD-1001 (Headphones, Delivered 14 days ago - Within 30d)</option>
+            <option value="ORD-1002">ORD-1002 (Smartwatch, Delivered 64 days ago - Expired Return)</option>
+            <option value="ORD-1003">ORD-1003 (Gaming Monitor, Purchased May 2026 - Within 1yr)</option>
+            <option value="ORD-1004">ORD-1004 (Keyboard, Purchased Jan 2025 - Expired Warranty)</option>
+            <option value="ORD-1005">ORD-1005 (Ergonomic Chair, In Transit)</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 mb-1">Subject</label>
+          <input id="new-subject" type="text" required placeholder="e.g. Return wireless headphones" class="w-full text-xs border border-slate-200 rounded-lg p-2 focus:ring-2 focus:ring-blue-500 outline-none">
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 mb-1">Customer Description / Inquiry</label>
+          <textarea id="new-desc" rows="4" required placeholder="Describe the issue or enter a test attack..." class="w-full text-xs border border-slate-200 rounded-lg p-2 focus:ring-2 focus:ring-blue-500 outline-none"></textarea>
+        </div>
+
+        <div class="flex justify-end space-x-2 pt-2">
+          <button type="button" onclick="closeNewTicketModal()" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold rounded-lg">Cancel</button>
+          <button type="submit" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold rounded-lg shadow-sm">Submit & Process</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="/static/js/app.js"></script>
+</body>
+</html>

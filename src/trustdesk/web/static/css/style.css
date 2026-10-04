@@ -1,0 +1,75 @@
+/* TrustDesk Modern Support Operations Styling */
+:root {
+  --primary: #2563eb;
+  --primary-hover: #1d4ed8;
+  --surface: #ffffff;
+  --background: #f8fafc;
+  --border: #e2e8f0;
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+  --success: #16a34a;
+  --warning: #f59e0b;
+  --danger: #dc2626;
+  --urgent: #9333ea;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background-color: var(--background);
+  color: var(--text-main);
+  margin: 0;
+  padding: 0;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.6rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 9999px;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+}
+
+.badge-low { background-color: #e2e8f0; color: #475569; }
+.badge-medium { background-color: #dbeafe; color: #1e40af; }
+.badge-high { background-color: #fef3c7; color: #92400e; }
+.badge-urgent { background-color: #fce7f3; color: #9d174d; }
+
+.badge-new { background-color: #f1f5f9; color: #334155; }
+.badge-triaged { background-color: #e0e7ff; color: #3730a3; }
+.badge-pending { background-color: #fef3c7; color: #b45309; }
+.badge-resolved { background-color: #dcfce7; color: #15803d; }
+.badge-escalated { background-color: #fee2e2; color: #b91c1c; }
+
+.citation-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.15rem 0.5rem;
+  font-size: 0.75rem;
+  font-family: monospace;
+  font-weight: 600;
+  color: #2563eb;
+  background-color: #eff6ff;
+  border: 1px solid #bfdbfe;
+  border-radius: 4px;
+  margin-right: 0.4rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.citation-pill:hover {
+  background-color: #dbeafe;
+  border-color: #93c5fd;
+}
+
+.idempotency-box {
+  background-color: #0f172a;
+  color: #38bdf8;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.75rem;
+  padding: 0.4rem 0.6rem;
+  border-radius: 4px;
+  word-break: break-all;
+}
